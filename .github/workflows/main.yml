@@ -9,6 +9,7 @@ on:
 # A workflow run is made up of one or more jobs
 jobs:
   continuous_integration:
+    name: Continous Integration
     runs-on: ubuntu-latest   # The type of runner that the job will run on
 
      # Steps represent a sequence of tasks that will be executed as part of the job
@@ -34,6 +35,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alura-devops-challenge:${{github.ref_name}}
     
   continous_deploy:
+    name: Continous Deploy
     needs: continuous_integration
     uses: ./.github/workflows/aws_deploy.yml
     with:

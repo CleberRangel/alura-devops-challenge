@@ -152,6 +152,13 @@ Uma nova task no AWS ECS e criada e configurada no Serviço `alura-service-devop
 
 Para fazer o deply to ECS a action [DonaldPiret ECS Deployment](https://github.com/marketplace/actions/ecs-deployment) que utiliza o pacote do [ECS Deploy](https://github.com/fabfuel/ecs-deploy) do Fabian Fuelling.
 
+Dentro do pasta `.github/workflows` existem 2 arquivos de workflow:
+- main.yml
+    - Roda o CI do projeto, criando uma nova image no Docker Hub
+    - Chama o aws_deploy.yml após o CI ter rodado com sucesso.
+- aws_deploy.yml
+    - Atualiza a task dentro to serviço da AWS ECS.
+
 
 
 
