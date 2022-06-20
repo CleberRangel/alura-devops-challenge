@@ -32,11 +32,11 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alura-devops-challenge:${{github.ref_name}}
-
-      - name: Push to ECS service
-        uses: CleberRangel/alura-devops-challenge/.github/workflows/aws_deploy.yml@main
-        with:
-          version-tag: ${{github.ref_name}}
+    
+  call-aws_deploy:
+    uses: /.github/workflows/aws_deploy.yml
+    with:
+      version-tag: ${{github.ref_name}}
 
   
 
