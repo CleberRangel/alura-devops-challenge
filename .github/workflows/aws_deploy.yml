@@ -40,4 +40,4 @@ jobs:
       - name: Running tasks
         uses: brunocascio/ecs-deploy@v2.0.0
         with:
-          args: deploy ${{env.ECS_CLUSTER}} ${{env.ECS_SERVICE}} --image alura-devops-challenge ${{env.DOCKER_IMAGE_NAME}}
+          args: deploy ${{env.ECS_CLUSTER}} ${{env.ECS_SERVICE}} --image docker-cleberrangeljr ${{env.DOCKER_IMAGE_NAME}}
