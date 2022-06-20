@@ -19,7 +19,6 @@ env:
   CONTAINER_NAME: docker-cleberrangeljr                                           # set this to the name of the container in the
                                                                                   # containerDefinitions section of your task definition
   DOCKER_IMAGE_NAME: cleberrangeljr/alura-devops-challenge:${{github.ref_name}}   # docker hub repo
-  ECR_REPOSITORY: alura-devops           # set this to your Amazon ECR repository name
 
 jobs:
   deploy:
@@ -38,30 +37,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_ECS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"   
-
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+      - name: Running tasks
+        uses: brunocascio/ecs-deploy@v2.0.0
         with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
-          container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
+          args: deploy ${{env.ECS_CLUSTER}} ${{env.ECS_SERVICE}} --image alura-devops-challenge ${{env.DOCKER_IMAGE_NAME}}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
