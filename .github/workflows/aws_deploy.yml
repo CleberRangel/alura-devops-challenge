@@ -2,13 +2,9 @@ name: Deploy to AWS ECS
 
 # Only trigger, when the build workflow succeeded
 on:
-  push:
-    tags:
-      - '*.*'
   workflow_run:
-    workflows: ["Docker CI"]
-    types:
-      - completed
+    workflows: [Docker CI]
+    types: [completed]
 
 env:
   AWS_REGION: us-east-1                                                           # set this to your preferred AWS region, e.g. us-west-1
