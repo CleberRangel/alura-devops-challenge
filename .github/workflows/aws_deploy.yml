@@ -6,7 +6,7 @@ on:
     tags:
       - '*.*'
   workflow_run:
-    workflows: [Docker CI]
+    workflows: ["Docker CI"]
     types:
       - completed
 
