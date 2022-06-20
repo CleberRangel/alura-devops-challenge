@@ -142,6 +142,16 @@ Exemplo:
  - Push da tag para o branch `main`
  - Verificar o workflow foi iniciado na aba `Actions` do repositório.
 
+ ___
+
+## Rotina de Continuous Delivery
+
+O workflow de Continuous Delivery acontece logo após o do Continuous Integration, caso nenhum erro aconteça.
+
+Uma nova task no AWS ECS e criada e configurada no Serviço `alura-service-devops`
+
+Para fazer o deply to ECS a action [DonaldPiret ECS Deployment](https://github.com/marketplace/actions/ecs-deployment) que utiliza o pacote do [ECS Deploy](https://github.com/fabfuel/ecs-deploy) do Fabian Fuelling.
+
 
 
 
