@@ -8,7 +8,7 @@ on:
 
 # A workflow run is made up of one or more jobs
 jobs:
-  build:
+  continuous_integration:
     runs-on: ubuntu-latest   # The type of runner that the job will run on
 
      # Steps represent a sequence of tasks that will be executed as part of the job
@@ -25,14 +25,20 @@ jobs:
       - name: Set up Docker build
         uses: docker/setup-buildx-action@v1
       
-      - name: Build and Push
+      - name: Build and Push to Docker
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alura-devops-challenge:${{github.ref_name}}
-
+    
+  continous_deploy:
+    needs: continuous_integration
+    uses: ./.github/workflows/aws_deploy.yml
+    with:
+      version-tag: ${{github.ref_name}}
+    secrets: inherit
 
   
 
