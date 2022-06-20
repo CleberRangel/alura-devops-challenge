@@ -34,7 +34,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alura-devops-challenge:${{github.ref_name}}
     
   call-aws_deploy:
-    uses: /.github/workflows/aws_deploy.yml
+    uses: ./.github/workflows/aws_deploy.yml
     with:
       version-tag: ${{github.ref_name}}
 
