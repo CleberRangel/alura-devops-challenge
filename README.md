@@ -1,6 +1,6 @@
 # Alura DevOps Challenge
 ___
-# Criação da imagem do projeto
+## Criação da imagem do projeto
 
 ## Requisitos
 - Instalar docker
@@ -29,7 +29,7 @@ Pass: admin123
 
 ___
 
-# Upload para AWS Elastic Container Service
+## Upload para AWS Elastic Container Service
 
 ## Cluster
 Acesse o painel do Elastic Container Service (ECS) e siga os passos:
@@ -127,7 +127,20 @@ Na aba `Tasks` da configuração cluster `alura-devops-cluster` terá duas 2 tas
 
 Boa...completou mais uma fase!!!
 
+___
 
+## Rotina de Continuous Integration
+
+O repositório esta configurado para automaticamente publicar atualizações do código para o Docker Hub `cleberrangeljr/alura-devops-challenge`.
+
+Para tal, é preciso criar uma tag no formato `*.*` e publicar no `main` branch, com isso uma git hub workflow vai ser iniciado.
+
+Exemplo:
+ - Modificar o código do repositório
+ - Fazer um push com as modificações para o branch `main`
+ - Criar tag com o número da próxima versão da image do Docker Hub, ex: `1.6`
+ - Push da tag para o branch `main`
+ - Verificar o workflow foi iniciado na aba `Actions` do repositório.
 
 
 
