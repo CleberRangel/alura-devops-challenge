@@ -34,7 +34,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alura-devops-challenge:${{github.ref_name}}
 
       - name: Push to ECS service
-        uses: .github/workflows/aws_deploy
+        uses: ./.github/workflows/aws_deploy
         with:
           version-tag: ${{github.ref_name}}
 
