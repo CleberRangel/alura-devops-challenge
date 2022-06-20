@@ -8,6 +8,12 @@ on:
         description: 'version to ecs task container image'
         required: true
         type: string
+    secrets:
+      AWS_ECS_ACESS_KEY:
+        required: true
+      AWS_ECS_SECRET_KEY:
+        required: true
+
 
 env:
   AWS_REGION: us-east-1                                                           # set this to your preferred AWS region, e.g. us-west-1
@@ -15,7 +21,7 @@ env:
   ECS_CLUSTER: alura-devop-challenge                                              # set this to your Amazon ECS cluster name
   CONTAINER_NAME: docker-cleberrangeljr                                           # set this to the name of the container in the
                                                                                   # containerDefinitions section of your task definition
-  DOCKER_IMAGE_NAME: cleberrangeljr/alura-devops-challenge   # docker hub repo
+  DOCKER_IMAGE_NAME: cleberrangeljr/alura-devops-challenge:${{inputs.version-tag}}   # docker hub repo
 
 jobs:
   deploy:
@@ -35,4 +41,4 @@ jobs:
         with:
           cluster: ${{env.ECS_CLUSTER}}
           target: ${{env.ECS_SERVICE}}
-          image: docker-cleberrangeljr ${{env.DOCKER_IMAGE_NAME}}:${{inputs.version-tag}}
+          image: docker-cleberrangeljr ${{env.DOCKER_IMAGE_NAME}}

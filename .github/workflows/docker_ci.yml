@@ -38,6 +38,7 @@ jobs:
     uses: ./.github/workflows/aws_deploy.yml
     with:
       version-tag: ${{github.ref_name}}
+    secrets: inherit
 
   
 
