@@ -13,6 +13,8 @@ on:
         required: true
       AWS_ECS_SECRET_KEY:
         required: true
+      DOCKER_HUB_USERNAME:
+        required: true
 
 
 env:
@@ -21,7 +23,7 @@ env:
   ECS_CLUSTER: alura-devop-challenge                                              # set this to your Amazon ECS cluster name
   CONTAINER_NAME: docker-cleberrangeljr                                           # set this to the name of the container in the
                                                                                   # containerDefinitions section of your task definition
-  DOCKER_IMAGE_NAME: cleberrangeljr/alura-devops-challenge:${{inputs.version-tag}}   # docker hub repo
+  DOCKER_IMAGE_NAME: ${{secrets.DOCKER_HUB_USERNAME}}/alura-devops-challenge:${{inputs.version-tag}}   # docker hub repo
 
 jobs:
   deploy:
